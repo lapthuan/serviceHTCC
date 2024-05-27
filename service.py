@@ -24,7 +24,7 @@ def read_and_update_data():
         # Đọc dữ liệu từ Firebase
         paO_ref = db.reference('SET/Pa0')
         O_Pa_ref = db.reference('MONITOR/O_Pa')
-        RCM_ref = db.reference('CONTROL/RCM')
+        RCM_ref = db.reference('CONTROL/RCM/data')
 
         paO = paO_ref.get()
         O_Pa = O_Pa_ref.get()
@@ -43,10 +43,10 @@ def read_and_update_data():
 
                 # Thực hiện logic
                 if paO > O_Pa:
-                    RCM_ref.set(1)
+                    RCM_ref.set("1")
                     print("Set 1")
                 else:
-                    RCM_ref.set(2)
+                    RCM_ref.set("2")
                     print("Set 2")
             except ValueError as e:
                 print(f"Error converting values to float: {e}")
