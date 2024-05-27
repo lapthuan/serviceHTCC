@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 # Sử dụng thông tin cấu hình để kết nối Firebase
-cred = credentials.Certificate("F:/HTCC/ServiceHTCC/taonghile-firebase-adminsdk-nyc00-d211922c1f.json")
+cred = credentials.Certificate("F:/HTCC/ServiceHTCC/taonghile.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': "https://taonghile-default-rtdb.firebaseio.com"
 })
