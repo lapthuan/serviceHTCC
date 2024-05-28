@@ -37,7 +37,7 @@ def read_and_update_data():
         else:
             # Chuyển đổi giá trị sang kiểu số nếu cần thiết
             try:
-                if thresholdPa == "1":
+                if thresholdPa == True:
                     paO = extract_value(paO)
                     O_Pa = extract_value(O_Pa)
 
@@ -50,7 +50,7 @@ def read_and_update_data():
                         print("Set 1")
                     else:
                         RCM_ref.set("2")
-                    print("Set 2")
+                        print("Set 2")
             except ValueError as e:
                 print(f"Error converting values to float: {e}")
 
