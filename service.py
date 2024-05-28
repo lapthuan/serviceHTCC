@@ -45,7 +45,7 @@ def read_and_update_data():
                     O_Pa = float(O_Pa)
 
                     # Thực hiện logic
-                    if paO > O_Pa:
+                    if paO <= O_Pa:
                         RCM_ref.set("1")
                         print("Set 1")
                     else:
