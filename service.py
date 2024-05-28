@@ -6,6 +6,7 @@ from datetime import datetime
 
 # Sử dụng thông tin cấu hình để kết nối Firebase
 cred = credentials.Certificate("F:/HTCC/ServiceHTCC/taonghile.json")
+# cred = credentials.Certificate("D:/ServiceHTCC/taonghile.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': "https://taonghile-default-rtdb.firebaseio.com"
 })
@@ -25,7 +26,8 @@ def read_and_update_data():
         paO_ref = db.reference('SET/Pa0')
         O_Pa_ref = db.reference('MONITOR/O_Pa')
         RCM_ref = db.reference('CONTROL/RCM/data')
-
+        thresholdPa_ref = db.reference('CONTROL/thresholdPa/status')
+        thresholdPa = thresholdPa_ref.get()
         paO = paO_ref.get()
         O_Pa = O_Pa_ref.get()
 
@@ -35,18 +37,19 @@ def read_and_update_data():
         else:
             # Chuyển đổi giá trị sang kiểu số nếu cần thiết
             try:
-                paO = extract_value(paO)
-                O_Pa = extract_value(O_Pa)
+                if thresholdPa == "1":
+                    paO = extract_value(paO)
+                    O_Pa = extract_value(O_Pa)
 
-                paO = float(paO)
-                O_Pa = float(O_Pa)
+                    paO = float(paO)
+                    O_Pa = float(O_Pa)
 
-                # Thực hiện logic
-                if paO > O_Pa:
-                    RCM_ref.set("1")
-                    print("Set 1")
-                else:
-                    RCM_ref.set("2")
+                    # Thực hiện logic
+                    if paO > O_Pa:
+                        RCM_ref.set("1")
+                        print("Set 1")
+                    else:
+                        RCM_ref.set("2")
                     print("Set 2")
             except ValueError as e:
                 print(f"Error converting values to float: {e}")
